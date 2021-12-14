@@ -1,5 +1,5 @@
 <?php
-include "header.php";
+include "headers.php";
 
 if(!isset($_SERVER['CONTENT_TYPE']) ||
    $_SERVER['CONTENT_TYPE'] !== 'application/x-www-form-urlencoded') {
