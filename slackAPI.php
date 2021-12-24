@@ -95,6 +95,7 @@ class SlackAPI implements ISlackAPI {
         curl_setopt( $ch, CURLOPT_POSTFIELDS, ["email"=>$mail]);
         $response = $this->curl_process($ch);
         
+        var_dump($response->user);
         if(!is_null($response)) {
             return $response->user;
         } else {
