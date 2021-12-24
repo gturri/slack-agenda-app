@@ -159,7 +159,7 @@ final class AgendaTest extends TestCase {
         $this->assertEquals(1, $events[$event->id()]["unknown_attendees"]);
         $this->assertEquals(array("SLACKID"), $events[$event->id()]["attendees"]);
         $this->assertFalse($events[$event->id()]["is_registered"]);
-        $this->assertEquals(0, count($events[$event->id()]["categories"]));
+        $this->assertEquals(1, count($events[$event->id()]["categories"]));
     }
 }
 
