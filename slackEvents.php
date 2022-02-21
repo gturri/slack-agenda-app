@@ -462,8 +462,13 @@ class SlackEvents {
     // @SEE https://api.slack.com/interactivity/handling#acknowledgment_response
     static function ack() {
         http_response_code(200);
-        fastcgi_finish_request(); //Ok for php-fpm
-        //need to find a solution for mod_php (ob_flush(), flush(), etc. does not work)
+        if (function_exists('fastcgi_finish_request')) {
+            // This is a function defined by php-fpm
+            // It makes it possible to update quickly the view of the user on Slack.
+            // On server where this is not available we fallback to not calling it at all which
+            // means that this app still works, but has more latency for its users
+            fastcgi_finish_request(); //Ok for php-fpm
+        }
     }
 
     private function postViewOpenForUnfindableEvent($trigger_id) {
