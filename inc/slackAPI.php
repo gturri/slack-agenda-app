@@ -15,6 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+require __DIR__ . '/../vendor/autoload.php';
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -43,11 +44,14 @@ class SlackAPI implements ISlackAPI {
     );
     
     function __construct($slack_bot_token, $slack_user_token) {
+        $this->bot_client = JoliCode\Slack\ClientFactory::create($slack_bot_token);
+        $this->user_client = JoliCode\Slack\ClientFactory::create($slack_user_token);
+
         $this->slack_bot_token = $slack_bot_token;
         $this->slack_user_token = $slack_user_token;
         
         $this->log = new Logger('SlackAPI');
-        setLogHandlers($this->log);
+        //setLogHandlers($this->log);
     }
 
     protected function curl_init($url, $additional_headers, $token = "bot") {
@@ -109,16 +113,18 @@ class SlackAPI implements ISlackAPI {
     }
 
     function users_lookupByEmail($mail) {
-        $ch = $this->curl_init("https://slack.com/api/users.lookupByEmail", array('application/x-www-form-urlencoded'));
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, ["email"=>$mail]);
-        $response = $this->curl_process($ch);
-        
-        if(!is_null($response)) {
-            return $response->user;
-        } else {
-            return NULL;
-        }   
+        $response = $this->bot_client->usersLookupByEmail(['email' => $mail]);
+        var_dump($response);
+        //$ch = $this->curl_init("https://slack.com/api/users.lookupByEmail", array('application/x-www-form-urlencoded'));
+        //curl_setopt($ch, CURLOPT_POST, true);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, ["email"=>$mail]);
+        //$response = $this->curl_process($ch);
+
+        //if (!is_null($response)) {
+        //    return $response->user;
+        //} else {
+        //    return null;
+        //}
     }
     
     function users_info($userid) {
@@ -199,3 +205,5 @@ class SlackAPI implements ISlackAPI {
         }
     }
 }
+$api = new SlackAPI( "<bot_token>",  "<user_token>");
+$api->users_lookupByEmail("guillaume.turri@gmail.com");
