@@ -44,6 +44,10 @@ setLogHandlers($log);
 // Extract request parts + HMAC check
 $request_body = file_get_contents('php://input');
 
-if(!security_check($_SERVER, $request_body, $slack_credentials, $log)) {
+try {
+    $_SERVER["SLACK_SIGNING_KEY"] = $slack_credentials["signing_secret"];
+    SlackPhp\Slick::app()->validateRequest(); // Would work as expected if this method was public
+} catch (RuntimeException $e) {
+    $log->error("Failed to validate the request");
     exit();
 }
