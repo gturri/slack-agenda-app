@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efcbe52a261679b31e0bf7eef3ef2d85",
+    "content-hash": "bdad763f86994424b4f6e8df7cbef0ba",
     "packages": [
         {
             "name": "monolog/monolog",
@@ -352,6 +352,51 @@
                 "xml"
             ],
             "time": "2020-10-03T10:08:14+00:00"
+        },
+        {
+            "name": "slack-php/slick",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/slack-php/slack-php-slick.git",
+                "reference": "09348745b46386ece6d4cc7a6bc3de15e90ceecf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/slack-php/slack-php-slick/zipball/09348745b46386ece6d4cc7a6bc3de15e90ceecf",
+                "reference": "09348745b46386ece6d4cc7a6bc3de15e90ceecf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "kahlan/kahlan": "^5.1",
+                "phpstan/phpstan": "^0.12.89"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Slick.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Lindblom",
+                    "email": "jeremeamia@gmail.com"
+                }
+            ],
+            "description": "Simple micro-framework for Slack app development",
+            "support": {
+                "issues": "https://github.com/slack-php/slack-php-slick/issues",
+                "source": "https://github.com/slack-php/slack-php-slick/tree/1.0.0"
+            },
+            "time": "2021-06-10T01:45:47+00:00"
         }
     ],
     "packages-dev": [
@@ -2456,5 +2501,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.2.0"
 }
